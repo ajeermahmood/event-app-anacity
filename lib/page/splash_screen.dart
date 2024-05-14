@@ -18,11 +18,11 @@ class SplashScreen extends StatelessWidget {
                 SizedBox(
                   width: MediaQuery.of(context).size.width / 2,
                   child: Image.asset(
-                    'assets/images/indus-logo.png',
+                    'assets/images/lldd.png',
                   ),
                 ),
                 Text(
-                  'Indus Event QR Code Reader',
+                  'Event App',
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

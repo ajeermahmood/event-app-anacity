@@ -5,7 +5,7 @@ class AppRoutes {
   static const homePage = '/home-page';
   static const agendaPage = '/agenda-page';
   static const badgePage = '/badge-page';
-  static const base = '/';
-  static const readingDetails = '/reading-details';
-  static const regDetails = '/reg-details';
+  static const askQuestionPage = '/ask-question-page';
+  static const allSpeakers = '/all-speakers';
+  static const speakerDetailsPage = '/speaker-details';
 }

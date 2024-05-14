@@ -1,9 +1,12 @@
 import 'package:event_app_anacity/bindings/base_bindings.dart';
 import 'package:event_app_anacity/page/agenda_page.dart';
+import 'package:event_app_anacity/page/ask_q_page.dart';
 import 'package:event_app_anacity/page/badge_page.dart';
 import 'package:event_app_anacity/page/home_page.dart';
 import 'package:event_app_anacity/page/login_page.dart';
 import 'package:event_app_anacity/page/signup_page.dart';
+import 'package:event_app_anacity/page/speaker_details.dart';
+import 'package:event_app_anacity/page/speakers_page.dart';
 import 'package:event_app_anacity/page/splash_screen.dart';
 import 'package:event_app_anacity/routes/app_routes.dart';
 import 'package:get/get.dart';
@@ -43,6 +46,24 @@ class AppPages {
     GetPage(
       name: AppRoutes.badgePage,
       page: () => const BadgePage(),
+      binding: BaseBindings(),
+      transition: Transition.circularReveal,
+    ),
+    GetPage(
+      name: AppRoutes.askQuestionPage,
+      page: () => const AskQuestionPage(),
+      binding: BaseBindings(),
+      transition: Transition.circularReveal,
+    ),
+    GetPage(
+      name: AppRoutes.allSpeakers,
+      page: () => const AllSpeakersPage(),
+      binding: BaseBindings(),
+      transition: Transition.circularReveal,
+    ),
+    GetPage(
+      name: AppRoutes.speakerDetailsPage,
+      page: () => const SpeakerDetailsPage(),
       binding: BaseBindings(),
       transition: Transition.circularReveal,
     ),

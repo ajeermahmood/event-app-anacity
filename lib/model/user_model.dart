@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class EventUserModel {
+class UserModel {
   final String message;
   final dynamic eventid;
   final bool status;
@@ -11,7 +11,7 @@ class EventUserModel {
   final String email;
   final List<EventId> eventIds;
 
-  EventUserModel({
+  UserModel({
     required this.message,
     required this.eventid,
     required this.status,
@@ -23,12 +23,12 @@ class EventUserModel {
     required this.eventIds,
   });
 
-  factory EventUserModel.fromJson(String str) =>
-      EventUserModel.fromMap(json.decode(str));
+  factory UserModel.fromJson(String str) =>
+      UserModel.fromMap(json.decode(str));
 
   String toJson() => json.encode(toMap());
 
-  factory EventUserModel.fromMap(Map<String, dynamic> json) => EventUserModel(
+  factory UserModel.fromMap(Map<String, dynamic> json) => UserModel(
         message: json["Message"],
         eventid: json["eventid"],
         status: json["Status"],

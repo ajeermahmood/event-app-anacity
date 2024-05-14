@@ -1,5 +1,7 @@
 import 'package:event_app_anacity/controller/agenda_page_controller.dart';
 import 'package:event_app_anacity/controller/badge_page_controller.dart';
+import 'package:event_app_anacity/widgets/app_bar_widget.dart';
+import 'package:event_app_anacity/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -8,40 +10,14 @@ class BadgePage extends GetView<BadgePageController> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     Get.put(AgendaPageController());
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-              onPressed: () async {
-                // await controller.logout();
-              },
-              icon: Icon(
-                Icons.menu,
-                color: Colors.blue[300],
-              ),
-            )
-          ],
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.blue[300],
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: Colors.grey[350],
-              height: 1.0,
-            ),
-          ),
-        ),
+        key: _scaffoldKey,
+        appBar: getAppBar(_scaffoldKey),
+        drawer: DrawerWidget(),
         body: Column(
           children: [
             const SizedBox(height: 10),
@@ -62,11 +38,21 @@ class BadgePage extends GetView<BadgePageController> {
                       'assets/images/example-qr-code.png',
                       fit: BoxFit.contain,
                     ),
-                    SizedBox(height: 20),
-                    Text('SCAN THIS QR CODE FOR ATTENDANCE'),
-                    SizedBox(height: 10),
-                    Text('ABDUL MUHEETH'),
-                    SizedBox(height: 20),
+                    // Image.network(
+                    //   controller.homePageController.userModel.value!.qrCode,
+                    //   fit: BoxFit.contain,
+                    // ),
+                    const SizedBox(height: 20),
+                    const Text('SCAN THIS QR CODE FOR ATTENDANCE'),
+                    const SizedBox(height: 10),
+                    const Text(
+                      '"ABDUL MUHEETH"',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.blue),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

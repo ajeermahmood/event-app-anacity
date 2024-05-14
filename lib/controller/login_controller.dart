@@ -1,7 +1,7 @@
+import 'package:event_app_anacity/controller/home_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:event_app_anacity/api/all_apis.dart';
-import 'package:event_app_anacity/controller/bottom_nav_controller.dart';
 import 'package:event_app_anacity/routes/app_routes.dart';
 import 'package:event_app_anacity/shared/shared_prefs.dart';
 
@@ -39,7 +39,9 @@ class LoginController extends GetxController {
             // print(userModel!.doctorName),
             if (userModel != null)
               {
-                await sharedPrefs.setUserID(userModel.useruniqueid),
+                await sharedPrefs.setUserEmail(emailController.text),
+                await sharedPrefs.setUserPassword(passwordController.text),
+                getHomePageController().userModel(userModel),
                 emailController.text = '',
                 passwordController.text = '',
                 Get.offAllNamed(AppRoutes.homePage),
@@ -65,5 +67,9 @@ class LoginController extends GetxController {
         isUserNotInsertData(false);
       });
     }
+  }
+
+  HomePageController getHomePageController() {
+    return Get.put(HomePageController(), permanent: true);
   }
 }

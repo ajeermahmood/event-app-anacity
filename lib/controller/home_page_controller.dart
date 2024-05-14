@@ -1,4 +1,5 @@
 import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/model/user_model.dart';
 import 'package:event_app_anacity/routes/app_routes.dart';
 import 'package:event_app_anacity/shared/shared_prefs.dart';
 import 'package:get/get.dart';
@@ -8,9 +9,14 @@ class HomePageController extends GetxController {
 
   ApiClass apiClass = ApiClass();
 
+  Rxn<UserModel> userModel = Rxn<UserModel>();
+
   Future<void> logout() async {
-    await sharedPrefs.removeUserID();
+    await sharedPrefs.removeUserEmail();
+    await sharedPrefs.removeUserPassword();
     Get.offAllNamed(AppRoutes.login);
+
+    Get.delete<HomePageController>(force: true);
   }
 
   List<Map<String, dynamic>> slidePaneList = [
@@ -20,7 +26,7 @@ class HomePageController extends GetxController {
     },
     {
       "image": "assets/images/speakers.png",
-      "path": "",
+      "path": AppRoutes.allSpeakers,
     },
     {
       "image": "assets/images/badge.png",
@@ -40,7 +46,7 @@ class HomePageController extends GetxController {
     },
     {
       "image": "assets/images/questions.png",
-      "path": "",
+      "path": AppRoutes.askQuestionPage,
     },
     {
       "image": "assets/images/voting.png",

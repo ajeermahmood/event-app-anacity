@@ -20,9 +20,9 @@ class DrawerWidget extends StatelessWidget {
       "path": AppRoutes.agendaPage,
     },
     {
-      "icon": Icons.person,
-      "title": 'Speaker',
-      "path": "",
+      "icon": Icons.people,
+      "title": 'Speakers',
+      "path": AppRoutes.allSpeakers,
     },
     {
       "icon": Icons.qr_code,
@@ -47,7 +47,7 @@ class DrawerWidget extends StatelessWidget {
     {
       "icon": Icons.question_mark,
       "title": 'Ask Questions',
-      "path": "",
+      "path": AppRoutes.askQuestionPage,
     },
     {
       "icon": Icons.bar_chart,
@@ -81,7 +81,11 @@ class DrawerWidget extends StatelessWidget {
           itemBuilder: (context, index) => InkWell(
             onTap: () {
               if (drawerList[index]["path"] != "") {
-                Get.toNamed(drawerList[index]["path"]);
+                if (drawerList[index]["path"] == AppRoutes.homePage) {
+                  Get.offAllNamed(drawerList[index]["path"]);
+                } else {
+                  Get.toNamed(drawerList[index]["path"]);
+                }
               }
             },
             child: ListTile(

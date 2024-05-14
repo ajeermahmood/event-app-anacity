@@ -1,5 +1,7 @@
 import 'package:event_app_anacity/controller/agenda_page_controller.dart';
 import 'package:event_app_anacity/model/event_model.dart';
+import 'package:event_app_anacity/widgets/app_bar_widget.dart';
+import 'package:event_app_anacity/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,39 +11,13 @@ class AgendaPage extends GetView<AgendaPageController> {
   @override
   Widget build(BuildContext context) {
     Get.put(AgendaPageController());
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          actions: [
-            IconButton(
-              onPressed: () async {
-                // await controller.logout();
-              },
-              icon: Icon(
-                Icons.menu,
-                color: Colors.blue[300],
-              ),
-            )
-          ],
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.blue[300],
-            ),
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1.0),
-            child: Container(
-              color: Colors.grey[350],
-              height: 1.0,
-            ),
-          ),
-        ),
+        key: _scaffoldKey,
+        appBar: getAppBar(_scaffoldKey),
+        drawer: DrawerWidget(),
         body: Obx(
           () => controller.isLoading.value
               ? const Center(child: CircularProgressIndicator())
@@ -57,7 +33,7 @@ class AgendaPage extends GetView<AgendaPageController> {
                     ),
                     const SizedBox(height: 20),
                     Text(
-                      "Agenda",
+                      "AGENDA",
                       style:
                           Theme.of(context).textTheme.headlineSmall!.copyWith(
                                 fontWeight: FontWeight.w500,

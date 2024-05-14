@@ -177,7 +177,9 @@ class SignUpPage extends GetView<SignUpController> {
                       height: 60,
                       child: ElevatedButton(
                         onPressed: () async {
-                          // await controller.login();
+                          controller.isRegisterOk().value
+                              ? await controller.signUp()
+                              : null;
                         },
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all(
@@ -215,6 +217,7 @@ class SignUpPage extends GetView<SignUpController> {
                     Center(
                       child: InkWell(
                         onTap: () {
+                          controller.clearTextFields();
                           Get.toNamed(AppRoutes.login);
                         },
                         child: Text(

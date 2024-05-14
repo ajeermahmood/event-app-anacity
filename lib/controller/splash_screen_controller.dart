@@ -1,8 +1,7 @@
-import 'package:get/get.dart';
 import 'package:event_app_anacity/api/all_apis.dart';
-import 'package:event_app_anacity/controller/bottom_nav_controller.dart';
 import 'package:event_app_anacity/routes/app_routes.dart';
 import 'package:event_app_anacity/shared/shared_prefs.dart';
+import 'package:get/get.dart';
 
 class SplashScreenViewController extends GetxController {
   SharedPrefs sharedPrefs = SharedPrefs();
@@ -16,20 +15,7 @@ class SplashScreenViewController extends GetxController {
     String? userId = await sharedPrefs.getUserID();
 
     if (userId != null) {
-      final BottomNavbarController bottomNavigationController =
-          Get.put(BottomNavbarController(), permanent: true);
-
-      await apiClass
-          .getUser(userId)
-          .then((value) => {
-                bottomNavigationController.userModel(value),
-              })
-          .then((_) => {
-                print(bottomNavigationController.userModel.value),
-                // Future.delayed(const Duration(seconds: 5), () {
-                Get.offAllNamed(AppRoutes.base),
-                // }),
-              });
+      Get.offAllNamed(AppRoutes.homePage);
     } else {
       Get.offAllNamed(AppRoutes.login);
     }

@@ -1,11 +1,12 @@
-import 'package:event_app_anacity/page/signup_page.dart';
-import 'package:get/get.dart';
 import 'package:event_app_anacity/bindings/base_bindings.dart';
+import 'package:event_app_anacity/page/agenda_page.dart';
+import 'package:event_app_anacity/page/badge_page.dart';
+import 'package:event_app_anacity/page/home_page.dart';
 import 'package:event_app_anacity/page/login_page.dart';
-import 'package:event_app_anacity/page/reg_details.dart';
+import 'package:event_app_anacity/page/signup_page.dart';
 import 'package:event_app_anacity/page/splash_screen.dart';
 import 'package:event_app_anacity/routes/app_routes.dart';
-import 'package:event_app_anacity/widgets/bottom_nav.dart';
+import 'package:get/get.dart';
 
 class AppPages {
   static final List<GetPage> pages = [
@@ -28,14 +29,20 @@ class AppPages {
       transition: Transition.circularReveal,
     ),
     GetPage(
-      name: AppRoutes.base,
-      page: () => const BottomNavbarWidget(),
+      name: AppRoutes.homePage,
+      page: () => const HomePage(),
       binding: BaseBindings(),
       transition: Transition.circularReveal,
     ),
     GetPage(
-      name: AppRoutes.regDetails,
-      page: () => const RegDetailsPage(),
+      name: AppRoutes.agendaPage,
+      page: () => const AgendaPage(),
+      binding: BaseBindings(),
+      transition: Transition.circularReveal,
+    ),
+    GetPage(
+      name: AppRoutes.badgePage,
+      page: () => const BadgePage(),
       binding: BaseBindings(),
       transition: Transition.circularReveal,
     ),

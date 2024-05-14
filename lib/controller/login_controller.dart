@@ -21,29 +21,37 @@ class LoginController extends GetxController {
 
   RxBool isPasswordDisplay = RxBool(false);
 
+  clearTextFields() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
   Future<void> login() async {
     loggingInLoading(true);
 
+    Map<String, dynamic> data = {
+      "Email": emailController.text,
+      "Password": passwordController.text,
+    };
+
     if (emailController.text != '' && passwordController.text != '') {
-      await apiClass
-          .login(emailController.text, passwordController.text)
-          .then((userModel) async => {
-                if (userModel != null)
-                  {
-                    await sharedPrefs.setUserID(userModel.userId),
-                    getBottomNavController().userModel(userModel),
-                    emailController.text = '',
-                    passwordController.text = '',
-                    Get.offAllNamed(AppRoutes.base),
-                    isUserDataIncorrect(false),
-                    loggingInLoading(false)
-                  }
-                else
-                  {
-                    isUserDataIncorrect(true),
-                    loggingInLoading(false),
-                  }
-              });
+      await apiClass.userLogin(data).then((userModel) async => {
+            // print(userModel!.doctorName),
+            if (userModel != null)
+              {
+                await sharedPrefs.setUserID(userModel.useruniqueid),
+                emailController.text = '',
+                passwordController.text = '',
+                Get.offAllNamed(AppRoutes.homePage),
+                isUserDataIncorrect(false),
+                loggingInLoading(false)
+              }
+            else
+              {
+                isUserDataIncorrect(true),
+                loggingInLoading(false),
+              }
+          });
 
       if (isUserDataIncorrect.value == true) {
         Future.delayed(const Duration(seconds: 2), () {
@@ -57,9 +65,5 @@ class LoginController extends GetxController {
         isUserNotInsertData(false);
       });
     }
-  }
-
-  BottomNavbarController getBottomNavController() {
-    return Get.put(BottomNavbarController(), permanent: true);
   }
 }

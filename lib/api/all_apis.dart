@@ -2,20 +2,67 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:event_app_anacity/model/client.dart';
-import 'package:event_app_anacity/model/event.dart';
+import 'package:event_app_anacity/model/event_model.dart';
 import 'package:event_app_anacity/model/user.dart';
+import 'package:event_app_anacity/model/user_model.dart';
 
 class ApiClass {
-  static const baseUrlMobile = 'https://indusre.ae/reg-form-jaipur-api/';
+  static const baseUrlMobile =
+      'https://ldb-me.ve-live.com/api/AdminApiProvider/';
+
+  static const baseUrl = 'https://ldb-me.ve-live.com/api/AdminApiProvider';
 
   final dio = Dio();
 
-  Future<bool> readQrCode(String uid, String userId) async {
+  /////////////////////////////////////////////////////////////////////////
+
+  Future<dynamic> registerUser(Map<String, dynamic> data) async {
+    var url = "$baseUrl/RegisterUser";
+
+    Response result = await dio.post(url, data: jsonEncode(data));
+
+    return result;
+  }
+
+  Future<EventUserModel?> userLogin(Map<String, dynamic> data) async {
+    var url = "$baseUrl/UserLogin";
+
+    Response result = await dio.post(url, data: jsonEncode(data));
+
+    if (result.data['Message'] != 'Login Failed') {
+      final EventUserModel model =
+          EventUserModel.fromJson(jsonEncode(result.data));
+      return model;
+    } else {
+      return null;
+    }
+  }
+
+  Future<List<EventModel>> getAgenda(int eventId) async {
+    var url = "$baseUrl/LoadAgenda?EventId=1";
+
+    Response result = await dio.post(url);
+
+    List<EventModel> eventsList = result.data['Data']['Result']!
+        .map<EventModel>((req) => EventModel.fromJson(jsonEncode(req)))
+        .toList();
+
+    return eventsList;
+  }
+
+  /////////////////////////////////////////////////////////////////////////
+
+  Future<List<EventModel>> readQrCode(String uid, String userId) async {
     var url = "${baseUrlMobile}qr_code_read.php";
 
     Response result = await dio.post(url,
         data: jsonEncode(<String, String>{'uid': uid, 'userId': userId}));
-    return result.data;
+
+    List<EventModel> eventsList = result.data['Data']['Result']!
+        .map<EventModel>((req) => EventModel.fromJson(jsonEncode(req)))
+        .toList();
+
+    return eventsList;
   }
 
   Future<bool> removeQrCodeReading(String uid) async {
@@ -47,16 +94,6 @@ class ApiClass {
       "total_count_reg": result.data['total_count_reg'],
       "total_count_unreg": result.data['total_count_unreg'],
     };
-  }
-
-  Future<EventModel> getEventDetails() async {
-    var url = "${baseUrlMobile}get_event_details.php";
-
-    Response result = await dio.get(url);
-
-    EventModel eventDetails = EventModel.fromJson(jsonEncode(result.data));
-
-    return eventDetails;
   }
 
   Future<UserModel?> login(String username, String password) async {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
+import 'package:event_app_anacity/controller/all_reg_controller.dart';
 import 'package:intl/intl.dart';
 
 class RegDetailsPage extends GetView<AllRegController> {

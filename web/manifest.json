@@ -1,6 +1,6 @@
 {
-    "name": "qr_code_reader_app",
-    "short_name": "qr_code_reader_app",
+    "name": "event_app_anacity",
+    "short_name": "event_app_anacity",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

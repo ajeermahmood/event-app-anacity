@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/api/all_apis.dart';
-import 'package:qr_code_reader_app/model/event.dart';
+import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/model/event.dart';
 
 class EventController extends GetxController with StateMixin {
   EventController();

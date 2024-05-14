@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/api/all_apis.dart';
-import 'package:qr_code_reader_app/controller/bottom_nav_controller.dart';
-import 'package:qr_code_reader_app/routes/app_routes.dart';
-import 'package:qr_code_reader_app/shared/shared_prefs.dart';
+import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/controller/bottom_nav_controller.dart';
+import 'package:event_app_anacity/routes/app_routes.dart';
+import 'package:event_app_anacity/shared/shared_prefs.dart';
 
 class LoginController extends GetxController {
   LoginController();
@@ -11,7 +11,7 @@ class LoginController extends GetxController {
   ApiClass apiClass = ApiClass();
   SharedPrefs sharedPrefs = SharedPrefs();
 
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   RxBool isUserDataIncorrect = RxBool(false);
@@ -19,18 +19,20 @@ class LoginController extends GetxController {
 
   RxBool loggingInLoading = RxBool(false);
 
+  RxBool isPasswordDisplay = RxBool(false);
+
   Future<void> login() async {
     loggingInLoading(true);
 
-    if (usernameController.text != '' && passwordController.text != '') {
+    if (emailController.text != '' && passwordController.text != '') {
       await apiClass
-          .login(usernameController.text, passwordController.text)
+          .login(emailController.text, passwordController.text)
           .then((userModel) async => {
                 if (userModel != null)
                   {
                     await sharedPrefs.setUserID(userModel.userId),
                     getBottomNavController().userModel(userModel),
-                    usernameController.text = '',
+                    emailController.text = '',
                     passwordController.text = '',
                     Get.offAllNamed(AppRoutes.base),
                     isUserDataIncorrect(false),

@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/api/all_apis.dart';
-import 'package:qr_code_reader_app/controller/bottom_nav_controller.dart';
-import 'package:qr_code_reader_app/routes/app_routes.dart';
-import 'package:qr_code_reader_app/shared/shared_prefs.dart';
+import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/controller/bottom_nav_controller.dart';
+import 'package:event_app_anacity/routes/app_routes.dart';
+import 'package:event_app_anacity/shared/shared_prefs.dart';
 
 class SplashScreenViewController extends GetxController {
   SharedPrefs sharedPrefs = SharedPrefs();

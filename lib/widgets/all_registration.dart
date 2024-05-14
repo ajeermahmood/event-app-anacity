@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
+import 'package:event_app_anacity/controller/all_reg_controller.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:qr_code_reader_app/model/client.dart';
+import 'package:event_app_anacity/model/client.dart';
 
 class AllRegWidget extends GetView<AllRegController> {
   const AllRegWidget({super.key});

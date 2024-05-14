@@ -1,4 +1,4 @@
-# qr_code_reader_app
+# event_app_anacity
 
 A new Flutter project.
 

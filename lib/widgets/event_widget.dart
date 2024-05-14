@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:qr_code_reader_app/controller/event_controller.dart';
+import 'package:event_app_anacity/controller/event_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
 class EventWidget extends GetView<EventController> {

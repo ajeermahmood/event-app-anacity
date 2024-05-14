@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:qr_code_reader_app/model/client.dart';
-import 'package:qr_code_reader_app/model/event.dart';
-import 'package:qr_code_reader_app/model/user.dart';
+import 'package:event_app_anacity/model/client.dart';
+import 'package:event_app_anacity/model/event.dart';
+import 'package:event_app_anacity/model/user.dart';
 
 class ApiClass {
   static const baseUrlMobile = 'https://indusre.ae/reg-form-jaipur-api/';

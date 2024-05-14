@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/controller/bottom_nav_controller.dart';
-import 'package:qr_code_reader_app/widgets/all_readings.dart';
-import 'package:qr_code_reader_app/widgets/event_widget.dart';
-import 'package:qr_code_reader_app/widgets/qr_code_reader.dart';
-import 'package:qr_code_reader_app/widgets/all_registration.dart';
+import 'package:event_app_anacity/controller/bottom_nav_controller.dart';
+import 'package:event_app_anacity/widgets/all_readings.dart';
+import 'package:event_app_anacity/widgets/event_widget.dart';
+import 'package:event_app_anacity/widgets/qr_code_reader.dart';
+import 'package:event_app_anacity/widgets/all_registration.dart';
 
 class BottomNavbarWidget extends GetView<BottomNavbarController> {
   const BottomNavbarWidget({super.key});

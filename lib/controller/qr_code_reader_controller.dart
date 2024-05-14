@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/api/all_apis.dart';
-import 'package:qr_code_reader_app/controller/all_readings_controller.dart';
-import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
-import 'package:qr_code_reader_app/shared/shared_prefs.dart';
+import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/controller/all_readings_controller.dart';
+import 'package:event_app_anacity/controller/all_reg_controller.dart';
+import 'package:event_app_anacity/shared/shared_prefs.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 import 'package:simple_vcard_parser/simple_vcard_parser.dart';
 

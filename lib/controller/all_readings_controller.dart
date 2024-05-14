@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:qr_code_reader_app/api/all_apis.dart';
-import 'package:qr_code_reader_app/controller/all_reg_controller.dart';
-import 'package:qr_code_reader_app/model/client.dart';
-import 'package:qr_code_reader_app/shared/shared_prefs.dart';
+import 'package:event_app_anacity/api/all_apis.dart';
+import 'package:event_app_anacity/controller/all_reg_controller.dart';
+import 'package:event_app_anacity/model/client.dart';
+import 'package:event_app_anacity/shared/shared_prefs.dart';
 
 class AllReadingsController extends GetxController with StateMixin {
   AllReadingsController();

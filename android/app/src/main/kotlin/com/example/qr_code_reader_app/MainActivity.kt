@@ -1,4 +1,4 @@
-package com.example.qr_code_reader_app
+package com.example.event_app_anacity
 
 import io.flutter.embedding.android.FlutterActivity
 

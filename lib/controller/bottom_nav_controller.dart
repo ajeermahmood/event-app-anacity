@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
-import 'package:qr_code_reader_app/model/user.dart';
-import 'package:qr_code_reader_app/routes/app_routes.dart';
-import 'package:qr_code_reader_app/shared/shared_prefs.dart';
+import 'package:event_app_anacity/model/user.dart';
+import 'package:event_app_anacity/routes/app_routes.dart';
+import 'package:event_app_anacity/shared/shared_prefs.dart';
 
 class BottomNavbarController extends GetxController {
   BottomNavbarController();

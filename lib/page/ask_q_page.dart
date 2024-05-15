@@ -62,8 +62,21 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
                               ),
                               const SizedBox(height: 30),
                               TextFormField(
-                                validator: (value) =>
-                                    value!.isEmpty ? 'Enter Your Name' : null,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      controller.isNameValid(false);
+                                    });
+                                    return "Enter Your Name *";
+                                  } else {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      controller.isNameValid(true);
+                                    });
+                                    return null;
+                                  }
+                                },
                                 controller: controller.nameController,
                                 decoration: const InputDecoration(
                                   filled: true,
@@ -73,8 +86,21 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
                               ),
                               const SizedBox(height: 10),
                               TextFormField(
-                                validator: (value) =>
-                                    value!.isEmpty ? 'Ask Question' : null,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      controller.isQuestionValid(false);
+                                    });
+                                    return "Ask Question *";
+                                  } else {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      controller.isQuestionValid(true);
+                                    });
+                                    return null;
+                                  }
+                                },
                                 controller: controller.questionController,
                                 decoration: const InputDecoration(
                                   filled: true,
@@ -89,7 +115,10 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
                                 height: 60,
                                 child: ElevatedButton(
                                   onPressed: () async {
-                                    await controller.askQuestion();
+                                    controller.isNameValid.value &&
+                                            controller.isQuestionValid.value
+                                        ? await controller.askQuestion()
+                                        : null;
                                   },
                                   style: ButtonStyle(
                                     shape: MaterialStateProperty.all(
@@ -98,7 +127,8 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
                                       ),
                                     ),
                                     backgroundColor: MaterialStateProperty.all(
-                                      controller.isQuestionOk().value
+                                      controller.isNameValid.value &&
+                                              controller.isQuestionValid.value
                                           ? Colors.blue
                                           : Colors.blue[100],
                                     ),

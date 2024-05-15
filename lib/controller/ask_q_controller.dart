@@ -22,13 +22,8 @@ class AskQuestionPageController extends GetxController {
 
   RxBool isProcessing = RxBool(false);
 
-  RxBool isQuestionOk() {
-    if (nameController.text != '' && questionController.text != '') {
-      return true.obs;
-    } else {
-      return false.obs;
-    }
-  }
+  RxBool isNameValid = RxBool(false);
+  RxBool isQuestionValid = RxBool(false);
 
   @override
   void onInit() async {
@@ -45,8 +40,7 @@ class AskQuestionPageController extends GetxController {
                   .toList(),
               selectedSession(allSessions.first),
             })
-        .then((value) => isLoading(false))
-        .then((value) => print(allSessions));
+        .then((value) => isLoading(false));
   }
 
   Future<void> askQuestion() async {
@@ -59,7 +53,24 @@ class AskQuestionPageController extends GetxController {
     };
     await apiClass
         .askQuestion(data)
-        .then((value) => print(value))
+        .then((value) => {
+              if (value['Message'] == 'Success')
+                {
+                  Get.snackbar(
+                    'Success',
+                    "You have raised a question successfully!",
+                    backgroundColor: Colors.green[200],
+                  ),
+                }
+              else
+                {
+                  Get.snackbar(
+                    'Error',
+                    "Something went wrong!",
+                    backgroundColor: Colors.red[200],
+                  ),
+                }
+            })
         .then((value) => isProcessing(false));
   }
 }

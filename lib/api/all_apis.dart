@@ -8,9 +8,6 @@ import 'package:event_app_anacity/model/user_model.dart';
 class ApiClass {
   static const baseUrl = 'https://ldb-me.ve-live.com/api/AdminApiProvider';
 
-  static const askQuestionUrl =
-      'https://ldb-me.event-loreal.com/api/AdminApiProvider/AskQuestion';
-
   final dio = Dio();
 
   /////////////////////////////////////////////////////////////////////////
@@ -62,7 +59,7 @@ class ApiClass {
   }
 
   Future<dynamic> askQuestion(Map<String, dynamic> data) async {
-    var url = askQuestionUrl;
+    var url = "$baseUrl/AskQuestion";
 
     Response result = await dio.post(url, data: jsonEncode(data));
 

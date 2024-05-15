@@ -21,6 +21,9 @@ class LoginController extends GetxController {
 
   RxBool isPasswordDisplay = RxBool(false);
 
+  RxBool isEmailValid = RxBool(false);
+  RxBool isPasswordValid = RxBool(false);
+
   clearTextFields() {
     emailController.clear();
     passwordController.clear();
@@ -71,5 +74,11 @@ class LoginController extends GetxController {
 
   HomePageController getHomePageController() {
     return Get.put(HomePageController(), permanent: true);
+  }
+
+  void goToSignUp() {
+    emailController.text = '';
+    passwordController.text = '';
+    Get.toNamed(AppRoutes.signup);
   }
 }

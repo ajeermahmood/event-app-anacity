@@ -20,7 +20,7 @@ class LoginPage extends GetView<LoginController> {
               children: <Widget>[
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height / 2.5,
+                  height: MediaQuery.of(context).size.height / 3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -43,112 +43,122 @@ class LoginPage extends GetView<LoginController> {
                     ],
                   ),
                 ),
-                Container(
-                  height: MediaQuery.of(context).size.height -
-                      (MediaQuery.of(context).size.height / 2),
-                  margin: const EdgeInsets.only(left: 30, right: 30),
-                  child: Obx(
-                    () => Form(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      child: Column(
-                        children: <Widget>[
-                          getErrorMessage(controller),
-                          TextFormField(
-                            validator: (value) =>
-                                EmailValidator.validate(value!)
-                                    ? null
-                                    : "Enter a valid email",
-                            controller: controller.emailController,
-                            decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Email',
-                            ),
-                          ),
-                          const SizedBox(height: 40),
-                          TextFormField(
-                            validator: (value) =>
-                                value!.isEmpty ? 'Enter a password' : null,
-                            controller: controller.passwordController,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              hintText: 'Password',
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  controller.isPasswordDisplay.value =
-                                      !controller.isPasswordDisplay.value;
-                                },
-                                child: controller.isPasswordDisplay.value
-                                    ? const Icon(Icons.visibility)
-                                    : const Icon(Icons.visibility_off),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.only(left: 30, right: 30),
+                    child: Obx(
+                      () => Form(
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Column(
+                          children: <Widget>[
+                            getErrorMessage(controller),
+                            TextFormField(
+                              validator: (value) {
+                                if (EmailValidator.validate(value!)) {
+                                  WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                    controller.isEmailValid(true);
+                                  });
+
+                                  return null;
+                                } else {
+                                  WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                    controller.isEmailValid(false);
+                                  });
+                                  return "Enter a valid email";
+                                }
+                              },
+                              controller: controller.emailController,
+                              decoration: const InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Email',
                               ),
                             ),
-                            obscureText: controller.isPasswordDisplay.value
-                                ? false
-                                : true,
-                          ),
-                          const SizedBox(height: 40),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 60,
-                            child: ElevatedButton(
-                              onPressed: () async {
-                                await controller.login();
+                            const SizedBox(height: 40),
+                            TextFormField(
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                    controller.isPasswordValid(false);
+                                  });
+                                  return "Enter a Password";
+                                } else {
+                                  WidgetsBinding.instance
+                                      .addPostFrameCallback((_) {
+                                    controller.isPasswordValid(true);
+                                  });
+                                  return null;
+                                }
                               },
-                              style: ButtonStyle(
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
+                              controller: controller.passwordController,
+                              decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
+                                hintText: 'Password',
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    controller.isPasswordDisplay.value =
+                                        !controller.isPasswordDisplay.value;
+                                  },
+                                  child: controller.isPasswordDisplay.value
+                                      ? const Icon(Icons.visibility)
+                                      : const Icon(Icons.visibility_off),
+                                ),
+                              ),
+                              obscureText: controller.isPasswordDisplay.value
+                                  ? false
+                                  : true,
+                            ),
+                            const SizedBox(height: 40),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 60,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  controller.isEmailValid.value &&
+                                          controller.isPasswordValid.value
+                                      ? await controller.login()
+                                      : null;
+                                },
+                                style: ButtonStyle(
+                                  shape: MaterialStateProperty.all(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                  ),
+                                  backgroundColor: MaterialStateProperty.all(
+                                    controller.isEmailValid.value &&
+                                            controller.isPasswordValid.value
+                                        ? Colors.blue
+                                        : Colors.blue[100],
                                   ),
                                 ),
-                                backgroundColor: MaterialStateProperty.all(
-                                  controller.emailController.text != '' &&
-                                          controller.passwordController.text !=
-                                              ''
-                                      ? Colors.blue
-                                      : Colors.blue[100],
-                                ),
-                              ),
-                              child: controller.loggingInLoading.value == true
-                                  ? const SizedBox(
-                                      width: 20,
-                                      height: 20,
-                                      child: CircularProgressIndicator(
-                                        color: Colors.white,
+                                child: controller.loggingInLoading.value == true
+                                    ? const SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          color: Colors.white,
+                                        ),
+                                      )
+                                    : Text(
+                                        'Login',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium!
+                                            .copyWith(
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.white,
+                                            ),
                                       ),
-                                    )
-                                  : Text(
-                                      'Login',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleMedium!
-                                          .copyWith(
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white,
-                                          ),
-                                    ),
+                              ),
                             ),
-                          ),
-
-                          const SizedBox(height: 20),
-                          Text(
-                            'Forget Password?',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleMedium!
-                                .copyWith(
-                                  fontWeight: FontWeight.w400,
-                                  color: Colors.grey[600],
-                                ),
-                          ),
-                          const SizedBox(height: 20),
-                          InkWell(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.signup);
-                            },
-                            child: Text(
-                              'Or Create an Account',
+                            const SizedBox(height: 20),
+                            Text(
+                              'Forget Password?',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleMedium!
@@ -157,14 +167,24 @@ class LoginPage extends GetView<LoginController> {
                                     color: Colors.grey[600],
                                   ),
                             ),
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(top: 20.0),
-                          //   child: InkWell(
-                          //       onTap: () {},
-                          //       child: const Text('Forgot Password?')),
-                          // ),
-                        ],
+                            const SizedBox(height: 20),
+                            InkWell(
+                              onTap: () {
+                                controller.goToSignUp();
+                              },
+                              child: Text(
+                                'Or Create an Account',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .copyWith(
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.grey[600],
+                                    ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

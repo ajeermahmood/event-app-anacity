@@ -2,6 +2,7 @@ import 'package:event_app_anacity/controller/agenda_page_controller.dart';
 import 'package:event_app_anacity/model/event_model.dart';
 import 'package:event_app_anacity/widgets/app_bar_widget.dart';
 import 'package:event_app_anacity/widgets/drawer_widget.dart';
+import 'package:event_app_anacity/widgets/event_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,37 +12,19 @@ class AgendaPage extends GetView<AgendaPageController> {
   @override
   Widget build(BuildContext context) {
     Get.put(AgendaPageController());
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        key: _scaffoldKey,
-        appBar: getAppBar(_scaffoldKey),
+        key: scaffoldKey,
+        appBar: getAppBar(scaffoldKey),
         drawer: DrawerWidget(),
         body: Obx(
           () => controller.isLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Column(
                   children: [
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        'assets/images/riyadh-loreal.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "AGENDA",
-                      style:
-                          Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.blue[700],
-                              ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Divider(),
+                    const EventLogoWidget(pageName: "AGENDA"),
                     TabBar(
                       labelColor: Colors.white,
                       indicator: BoxDecoration(
@@ -123,29 +106,36 @@ class AgendaPage extends GetView<AgendaPageController> {
                                             child: Text(event.time),
                                           ),
                                         ),
-                                        DataCell(Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(event.topic),
-                                            event.speakerName != ""
-                                                ? Column(
-                                                    children: [
-                                                      const SizedBox(height: 5),
-                                                      Text(
-                                                        event.speakerName,
-                                                        style: const TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
+                                        DataCell(
+                                          SingleChildScrollView(
+                                            child: Column(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(event.topic),
+                                                event.speakerName != ""
+                                                    ? Column(
+                                                        children: [
+                                                          const SizedBox(
+                                                              height: 5),
+                                                          Text(
+                                                            event.speakerName,
+                                                            style:
+                                                                const TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                            ),
+                                                          )
+                                                        ],
                                                       )
-                                                    ],
-                                                  )
-                                                : const SizedBox(),
-                                          ],
-                                        )),
+                                                    : const SizedBox(),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   )

@@ -11,12 +11,12 @@ class SpeakerDetailsPage extends GetView<SpeakersController> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        key: _scaffoldKey,
-        appBar: getAppBar(_scaffoldKey),
+        key: scaffoldKey,
+        appBar: getAppBar(scaffoldKey),
         drawer: DrawerWidget(),
         body: Obx(
           () => controller.isLoading.value
@@ -27,9 +27,10 @@ class SpeakerDetailsPage extends GetView<SpeakersController> {
                       const SizedBox(height: 10),
                       SizedBox(
                         width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height / 5,
                         child: Image.asset(
                           'assets/images/riyadh-loreal.png',
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -48,7 +49,11 @@ class SpeakerDetailsPage extends GetView<SpeakersController> {
                                     imageUrl: controller
                                         .selectedSpeaker.value!.speakerImage,
                                     placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
+                                        const SizedBox(
+                                      width: 100,
+                                      height: 100,
+                                      child: CircularProgressIndicator(),
+                                    ),
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),
                                   ),

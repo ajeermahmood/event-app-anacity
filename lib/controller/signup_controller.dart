@@ -25,6 +25,13 @@ class SignUpController extends GetxController {
 
   RxBool isPasswordDisplay = RxBool(false);
 
+  RxBool isFullNameValid = RxBool(false);
+  RxBool isEmailValid = RxBool(false);
+  RxBool isPasswordValid = RxBool(false);
+  RxBool isMobileNoValid = RxBool(false);
+  RxBool isInstaIDValid = RxBool(false);
+  RxBool isTitokIDValid = RxBool(false);
+
   List<String> specailityList = <String>['One', 'Two', 'Three', 'Four'];
 
   RxString specialityValue = 'One'.obs;
@@ -41,17 +48,14 @@ class SignUpController extends GetxController {
   RxBool termsBool = RxBool(false);
 
   RxBool isRegisterOk() {
-    if (nameController.text != '' &&
-        emailController.text != '' &&
-        passwordController.text != '' &&
-        mobileNoController.text != '' &&
-        instaIDController.text != '' &&
-        titokIDController.text != '' &&
-        termsBool.value) {
-      return true.obs;
-    } else {
-      return false.obs;
-    }
+    return (isFullNameValid.value &&
+            isEmailValid.value &&
+            isPasswordValid.value &&
+            isMobileNoValid.value &&
+            isInstaIDValid.value &&
+            isTitokIDValid.value &&
+            termsBool.value)
+        .obs;
   }
 
   clearTextFields() {

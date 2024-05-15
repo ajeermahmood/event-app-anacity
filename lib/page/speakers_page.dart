@@ -1,6 +1,7 @@
 import 'package:event_app_anacity/controller/speakers_controller.dart';
 import 'package:event_app_anacity/widgets/app_bar_widget.dart';
 import 'package:event_app_anacity/widgets/drawer_widget.dart';
+import 'package:event_app_anacity/widgets/event_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:get/get.dart';
@@ -11,37 +12,19 @@ class AllSpeakersPage extends GetView<SpeakersController> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        key: _scaffoldKey,
-        appBar: getAppBar(_scaffoldKey),
+        key: scaffoldKey,
+        appBar: getAppBar(scaffoldKey),
         drawer: DrawerWidget(),
         body: Obx(
           () => controller.isLoading.value
               ? const Center(child: CircularProgressIndicator())
               : Column(
                   children: [
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        'assets/images/riyadh-loreal.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    Text(
-                      "SPEAKERS",
-                      style:
-                          Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: Colors.blue[700],
-                              ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Divider(),
+                    const EventLogoWidget(pageName: "SPEAKERS"),
                     Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,

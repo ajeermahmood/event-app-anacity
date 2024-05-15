@@ -1,6 +1,7 @@
 import 'package:event_app_anacity/controller/ask_q_controller.dart';
 import 'package:event_app_anacity/widgets/app_bar_widget.dart';
 import 'package:event_app_anacity/widgets/drawer_widget.dart';
+import 'package:event_app_anacity/widgets/event_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -9,12 +10,12 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        key: _scaffoldKey,
-        appBar: getAppBar(_scaffoldKey),
+        key: scaffoldKey,
+        appBar: getAppBar(scaffoldKey),
         drawer: DrawerWidget(),
         body: Obx(
           () => controller.isLoading.value
@@ -22,25 +23,7 @@ class AskQuestionPage extends GetView<AskQuestionPageController> {
               : SingleChildScrollView(
                   child: Column(
                     children: [
-                      const SizedBox(height: 10),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width,
-                        child: Image.asset(
-                          'assets/images/riyadh-loreal.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(
-                        "ASK QUESTION",
-                        style:
-                            Theme.of(context).textTheme.headlineSmall!.copyWith(
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.blue[700],
-                                ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Divider(),
+                      const EventLogoWidget(pageName: "ASK QUESTION"),
                       Padding(
                         padding: const EdgeInsets.all(30),
                         child: Form(

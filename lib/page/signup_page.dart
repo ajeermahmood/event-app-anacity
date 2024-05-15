@@ -34,8 +34,19 @@ class SignUpPage extends GetView<SignUpController> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TextFormField(
-                      validator: (value) =>
-                          value!.isEmpty ? 'Enter Full Name *' : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isFullNameValid(false);
+                          });
+                          return "Enter Full Name *";
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isFullNameValid(true);
+                          });
+                          return null;
+                        }
+                      },
                       controller: controller.nameController,
                       decoration: const InputDecoration(
                         filled: true,
@@ -45,9 +56,19 @@ class SignUpPage extends GetView<SignUpController> {
                     ),
                     const SizedBox(height: 30),
                     TextFormField(
-                      validator: (value) => EmailValidator.validate(value!)
-                          ? null
-                          : "Enter a valid email",
+                      validator: (value) {
+                        if (EmailValidator.validate(value!)) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isEmailValid(true);
+                          });
+                          return null;
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isEmailValid(false);
+                          });
+                          return "Enter a valid email";
+                        }
+                      },
                       controller: controller.emailController,
                       decoration: const InputDecoration(
                         filled: true,
@@ -57,8 +78,19 @@ class SignUpPage extends GetView<SignUpController> {
                     ),
                     const SizedBox(height: 30),
                     TextFormField(
-                      validator: (value) =>
-                          value!.isEmpty ? 'Enter a password' : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isPasswordValid(false);
+                          });
+                          return 'Enter a password *';
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isPasswordValid(true);
+                          });
+                          return null;
+                        }
+                      },
                       controller: controller.passwordController,
                       decoration: InputDecoration(
                         filled: true,
@@ -123,8 +155,19 @@ class SignUpPage extends GetView<SignUpController> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      validator: (value) =>
-                          value!.isEmpty ? 'Enter Mobile Number *' : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isMobileNoValid(false);
+                          });
+                          return 'Enter Mobile Number *';
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isMobileNoValid(true);
+                          });
+                          return null;
+                        }
+                      },
                       controller: controller.mobileNoController,
                       decoration: const InputDecoration(
                         filled: true,
@@ -137,8 +180,19 @@ class SignUpPage extends GetView<SignUpController> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      validator: (value) =>
-                          value!.isEmpty ? 'Instagram @' : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isInstaIDValid(false);
+                          });
+                          return 'Instagram @';
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isInstaIDValid(true);
+                          });
+                          return null;
+                        }
+                      },
                       controller: controller.instaIDController,
                       decoration: const InputDecoration(
                         filled: true,
@@ -148,7 +202,19 @@ class SignUpPage extends GetView<SignUpController> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      validator: (value) => value!.isEmpty ? 'TikTok @' : null,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isTitokIDValid(false);
+                          });
+                          return 'TikTok @';
+                        } else {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isTitokIDValid(true);
+                          });
+                          return null;
+                        }
+                      },
                       controller: controller.titokIDController,
                       decoration: const InputDecoration(
                         filled: true,

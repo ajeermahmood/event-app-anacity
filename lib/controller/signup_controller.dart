@@ -78,20 +78,26 @@ class SignUpController extends GetxController {
       "Country": countryValue.value,
       "InstagramLink": instaIDController.text,
       "TikTokLink": titokIDController.text,
-      "Userconsent": termsBool.value ? 1 : 0, //termsBool.value ? 1 : 0
+      "Userconsent": termsBool.value ? 1 : 0,
     };
-
-    // print(data);
 
     await apiClass.registerUser(data).then((value) => {
           if (jsonDecode(value.toString())['Message'] == 'Failed')
             {
-              Get.snackbar("Register Failed", 'Something went wrong'),
+              Get.snackbar(
+                "Register Failed",
+                'Something went wrong',
+                backgroundColor: Colors.red[200],
+              ),
               loggingInLoading(false),
             }
           else
             {
-              Get.snackbar("Success", 'Registered Successfully'),
+              Get.snackbar(
+                "Success",
+                'Registered Successfully',
+                backgroundColor: Colors.green[200],
+              ),
               clearTextFields(),
               Get.toNamed(AppRoutes.login),
               loggingInLoading(false),

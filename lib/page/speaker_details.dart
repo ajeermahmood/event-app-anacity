@@ -76,14 +76,6 @@ class SpeakerDetailsPage extends GetView<SpeakersController> {
                                     fontSize: 25,
                                   ),
                                 ),
-                                Text(
-                                  controller.selectedSpeaker.value!.id
-                                      .toString(),
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25,
-                                  ),
-                                )
                               ],
                             ),
                           ),

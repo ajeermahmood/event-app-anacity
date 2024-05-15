@@ -25,12 +25,11 @@ class SplashScreenViewController extends GetxController {
         "Password": password,
       };
 
+      Get.offAllNamed(AppRoutes.homePage);
+
       await apiClass
           .userLogin(data)
-          .then((userModel) async => {
-                homePageController.userModel(userModel),
-              })
-          .then((value) => Get.offAllNamed(AppRoutes.homePage));
+          .then((userModel) async => homePageController.userModel(userModel));
     } else {
       Get.offAllNamed(AppRoutes.login);
     }

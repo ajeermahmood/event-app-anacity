@@ -1,33 +1,34 @@
 import 'dart:convert';
 
-import 'package:dio/dio.dart';
 import 'package:event_app_anacity/model/event_model.dart';
 import 'package:event_app_anacity/model/speaker_model.dart';
 import 'package:event_app_anacity/model/user_model.dart';
+import 'package:http/http.dart' as http;
 
 class ApiClass {
+  var client = http.Client();
   static const baseUrl = 'https://ldb-me.ve-live.com/api/AdminApiProvider';
-
-  final dio = Dio();
 
   /////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////
 
   Future<dynamic> registerUser(Map<String, dynamic> data) async {
-    var url = "$baseUrl/RegisterUser";
+    var url = Uri.parse("$baseUrl/RegisterUser");
 
-    Response result = await dio.post(url, data: jsonEncode(data));
+    dynamic result = await client.post(url, body: data);
 
-    return result;
+    return jsonDecode(result.body);
   }
 
   Future<UserModel?> userLogin(Map<String, dynamic> data) async {
-    var url = "$baseUrl/UserLogin";
+    var url = Uri.parse("$baseUrl/UserLogin");
 
-    Response result = await dio.post(url, data: jsonEncode(data));
+    dynamic result = await client.post(url, body: data);
 
-    if (result.data['Message'] != 'Login Failed') {
-      final UserModel model = UserModel.fromJson(jsonEncode(result.data));
+    var body = jsonDecode(result.body);
+
+    if (body['Message'] != 'Login Failed') {
+      final UserModel model = UserModel.fromJson(jsonEncode(body));
       return model;
     } else {
       return null;
@@ -35,11 +36,13 @@ class ApiClass {
   }
 
   Future<List<EventModel>> getAgenda(int eventId) async {
-    var url = "$baseUrl/LoadAgenda?EventId=1";
+    var url = Uri.parse("$baseUrl/LoadAgenda?EventId=1");
 
-    Response result = await dio.post(url);
+    dynamic result = await client.post(url);
 
-    List<EventModel> eventsList = result.data['Data']['Result']!
+    var body = jsonDecode(result.body);
+
+    List<EventModel> eventsList = body['Data']['Result']!
         .map<EventModel>((req) => EventModel.fromJson(jsonEncode(req)))
         .toList();
 
@@ -47,11 +50,13 @@ class ApiClass {
   }
 
   Future<List<SpeakerModel>> getSpeakers(int eventId) async {
-    var url = "$baseUrl/LoadSpeakers?EventId=1";
+    var url = Uri.parse("$baseUrl/LoadSpeakers?EventId=1");
 
-    Response result = await dio.post(url);
+    dynamic result = await client.post(url);
 
-    List<SpeakerModel> speakersList = result.data['Data']['Result']!
+    var body = jsonDecode(result.body);
+
+    List<SpeakerModel> speakersList = body['Data']['Result']!
         .map<SpeakerModel>((req) => SpeakerModel.fromJson(jsonEncode(req)))
         .toList();
 
@@ -59,11 +64,11 @@ class ApiClass {
   }
 
   Future<dynamic> askQuestion(Map<String, dynamic> data) async {
-    var url = "$baseUrl/AskQuestion";
+    var url = Uri.parse("$baseUrl/AskQuestion");
 
-    Response result = await dio.post(url, data: jsonEncode(data));
+    dynamic result = await client.post(url, body: data);
 
-    return result.data;
+    return jsonDecode(result.body);
   }
 
   /////////////////////////////////////////////////////////////////////////

@@ -5,6 +5,7 @@ import 'package:event_app_anacity/routes/app_routes.dart';
 import 'package:event_app_anacity/routes/getx_app_pages.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

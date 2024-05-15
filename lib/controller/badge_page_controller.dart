@@ -8,7 +8,16 @@ class BadgePageController extends GetxController {
 
   ApiClass apiClass = ApiClass();
 
-  RxBool isLoading = RxBool(true);
+  RxString qrCodeImg = "".obs;
 
   HomePageController homePageController = Get.put(HomePageController());
+
+  @override
+  void onInit() async {
+    super.onInit();
+
+    var firstPart = homePageController.userModel.value!.qrCode.split('/');
+
+    qrCodeImg('https://ldb-me.ve-live.com/QRUploader/${firstPart[5]}');
+  }
 }

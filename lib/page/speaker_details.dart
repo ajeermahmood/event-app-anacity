@@ -50,9 +50,11 @@ class SpeakerDetailsPage extends GetView<SpeakersController> {
                                         .selectedSpeaker.value!.speakerImage,
                                     placeholder: (context, url) =>
                                         const SizedBox(
-                                      width: 100,
-                                      height: 100,
-                                      child: CircularProgressIndicator(),
+                                      height: 200.0,
+                                      width: 200.0,
+                                      child: Center(
+                                        child: CircularProgressIndicator(),
+                                      ),
                                     ),
                                     errorWidget: (context, url, error) =>
                                         const Icon(Icons.error),

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-dynamic getAppBar(GlobalKey<ScaffoldState> _scaffoldKey) {
+dynamic getAppBar(GlobalKey<ScaffoldState> scaffoldKey) {
   return AppBar(
     backgroundColor: Colors.white,
     actions: [
       IconButton(
         onPressed: () {
-          _scaffoldKey.currentState!.openDrawer();
+          scaffoldKey.currentState!.openDrawer();
         },
         icon: Icon(
           Icons.menu,

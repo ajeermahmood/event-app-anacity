@@ -1,8 +1,7 @@
-import 'package:event_app_anacity/routes/app_routes.dart';
+import 'package:email_validator/email_validator.dart';
+import 'package:event_app_anacity/controller/login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:event_app_anacity/controller/login_controller.dart';
-import 'package:email_validator/email_validator.dart';
 
 class LoginPage extends GetView<LoginController> {
   const LoginPage({super.key});

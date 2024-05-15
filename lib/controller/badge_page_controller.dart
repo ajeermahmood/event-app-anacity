@@ -15,9 +15,7 @@ class BadgePageController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-
     var firstPart = homePageController.userModel.value!.qrCode.split('/');
-
     qrCodeImg('https://ldb-me.ve-live.com/QRUploader/${firstPart[5]}');
   }
 }

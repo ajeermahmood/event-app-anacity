@@ -472,7 +472,7 @@
 				DEVELOPMENT_TEAM = XWGUY7APU9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "QR Code Reader";
+				INFOPLIST_KEY_CFBundleDisplayName = "Event App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -662,7 +662,7 @@
 				DEVELOPMENT_TEAM = XWGUY7APU9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "QR Code Reader";
+				INFOPLIST_KEY_CFBundleDisplayName = "Event App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -689,7 +689,7 @@
 				DEVELOPMENT_TEAM = XWGUY7APU9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Runner/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "QR Code Reader";
+				INFOPLIST_KEY_CFBundleDisplayName = "Event App";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
